@@ -1,5 +1,6 @@
 package com.cours_m2.gastroguidemichelin.config.exception;
 
+import com.cours_m2.gastroguidemichelin.evaluation.exception.UnauthorizeUpdatedEvaluation;
 import com.cours_m2.gastroguidemichelin.restaurant.exception.RestaurantNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -12,6 +13,14 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleRestaurantNotFoundException(RestaurantNotFoundException exception) {
         ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
         problemDetail.setTitle("Restaurant introuvable");
+        problemDetail.setDetail(exception.getMessage());
+        return problemDetail;
+    }
+
+    @ExceptionHandler(UnauthorizeUpdatedEvaluation.class)
+    public ProblemDetail handleUnauthorizeUpdatedEvaluation(UnauthorizeUpdatedEvaluation exception) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.FORBIDDEN);
+        problemDetail.setTitle("Modification non autorisée");
         problemDetail.setDetail(exception.getMessage());
         return problemDetail;
     }

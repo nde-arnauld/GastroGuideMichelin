@@ -29,8 +29,8 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
 
     /*
-     * Une amélioration serait de créer un champ pour la note afin de ne pas avoir
-     * à recalculer la note à chaque requête.
+     * Une amélioration serait de créer un champ pour la moyenne afin de ne pas avoir
+     * à recalculer la moyenne à chaque requête.
      */
 
     /*
@@ -62,7 +62,7 @@ public class RestaurantController {
             RestaurantEntity restaurant = createRequest.toRestaurantEntity();
             this.restaurantService.createRestaurant(restaurant);
         }
-        return "Restaurants seeded successfully!";
+        return "Restaurants peuplés avec succès!";
     }
 
     @Operation(summary = "Créer un restaurant", description = "Cette méthode permet de créer un restaurant.")
@@ -76,7 +76,7 @@ public class RestaurantController {
     @ResponseStatus(HttpStatus.CREATED)
     public RestaurantDTO.RestaurantResponse createRestaurant(
             @Valid
-            @RequestPart("restaurant") RestaurantDTO.CreateRestaurantRequest createRequest,
+            @RequestPart(value = "restaurant") RestaurantDTO.CreateRestaurantRequest createRequest,
             @RequestPart(value = "image", required = false) MultipartFile image
             ) throws IOException {
         RestaurantEntity restaurant = createRequest.toRestaurantEntity();

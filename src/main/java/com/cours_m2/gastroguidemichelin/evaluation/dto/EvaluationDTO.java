@@ -24,14 +24,11 @@ public class EvaluationDTO {
         @Max(3)
         private Integer note;
 
-        private List<String> images;
-
         public EvaluationEntity toEvaluationEntity() {
             return EvaluationEntity.builder()
                     .evaluatorName(evaluatorName)
                     .comment(comment)
                     .note(note)
-                    .images(images)
                     .build();
         }
     }
