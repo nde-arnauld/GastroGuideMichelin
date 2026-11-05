@@ -37,3 +37,6 @@ build/
 
 ### Credentials ###
 src/main/resources/application.yaml
+
+### Lucene index files ###
+data/

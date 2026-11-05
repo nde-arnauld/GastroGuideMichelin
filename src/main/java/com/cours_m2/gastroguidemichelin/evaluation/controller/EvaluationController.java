@@ -74,6 +74,16 @@ public class EvaluationController {
                 .toList();
     }
 
+    @GetMapping(value = "/evaluations-lucene", params = "keywords")
+    @ResponseStatus(HttpStatus.OK)
+    public List<EvaluationDTO.EvaluationResponse> getEvaluationsByKeywordsLucene(@RequestParam List<String> keywords) {
+        log.info("Fetching evaluations by keywords lucene: {}", keywords);
+        return this.evaluationService
+                .getEvaluationsByKeywords(keywords).stream()
+                .map(EvaluationDTO.EvaluationResponse::fromEvaluationEntity)
+                .toList();
+    }
+
     @GetMapping("/evaluations/mine")
     @ResponseStatus(HttpStatus.OK)
     public List<EvaluationDTO.EvaluationResponse> getEvaluationsByEvaluatorName(@RequestBody String evaluatorName) {
